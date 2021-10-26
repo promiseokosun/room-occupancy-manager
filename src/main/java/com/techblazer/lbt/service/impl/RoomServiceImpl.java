@@ -1,5 +1,7 @@
 package com.techblazer.lbt.service.impl;
 
+import com.techblazer.lbt.constant.RoomStatuses;
+import com.techblazer.lbt.constant.RoomTypes;
 import com.techblazer.lbt.model.Room;
 import com.techblazer.lbt.repo.RoomRepo;
 import com.techblazer.lbt.service.RoomService;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.techblazer.lbt.constant.RoomStatuses.AVAILABLE;
 
 @Service
 @Slf4j
@@ -40,6 +44,14 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void deleteRoom(Long roomId) {
         roomRepo.deleteById(roomId);
+    }
+
+    public List<Room> getAvailableRooms() {
+        return roomRepo.findByStatusOrderByPriceDesc(AVAILABLE);
+    }
+
+    public List<Room> getAvailableRoomsByType(RoomTypes roomType) {
+        return roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, roomType);
     }
 
 }

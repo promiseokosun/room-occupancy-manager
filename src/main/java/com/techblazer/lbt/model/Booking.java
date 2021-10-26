@@ -29,4 +29,10 @@ public class Booking {
     @ManyToMany
     private List<Guest> guests = new ArrayList<>();
 
+    public Booking(Long id, double amountPaid, Room room, List<Guest> guests) {
+        this.id = id;
+        this.amountPaid = amountPaid;
+        this.room = room;
+        this.guests = guests;
+    }
 }

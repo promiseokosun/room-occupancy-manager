@@ -1,5 +1,6 @@
 package com.techblazer.lbt.model;
 
+import com.techblazer.lbt.constant.RoomStatuses;
 import com.techblazer.lbt.constant.RoomTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +26,15 @@ public class Room {
     private double price;
 
     private int number;
+
+    @Enumerated(EnumType.STRING)
+    private RoomStatuses status = RoomStatuses.AVAILABLE;
+
+    public Room(Long id, RoomTypes type, String description, double price, int number) {
+        this.id = id;
+        this.type = type;
+        this.description = description;
+        this.price = price;
+        this.number = number;
+    }
 }

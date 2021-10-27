@@ -1,7 +1,6 @@
 package com.techblazer.lbt.repo;
 
 import com.techblazer.lbt.constant.RoomStatuses;
-import com.techblazer.lbt.constant.RoomTypes;
 import com.techblazer.lbt.model.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +14,5 @@ public interface RoomRepo extends JpaRepository<Room, Long> {
 
     List<Room> findByStatusOrderByPriceDesc(RoomStatuses status);
 
-    List<Room> findByStatusAndTypeOrderByPriceDesc(RoomStatuses status, RoomTypes roomType);
+    List<Room> findByStatusAndTypeOrderByPriceDesc(RoomStatuses status, String roomType);
 }

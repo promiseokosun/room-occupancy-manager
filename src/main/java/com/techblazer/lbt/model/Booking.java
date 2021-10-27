@@ -1,13 +1,12 @@
 package com.techblazer.lbt.model;
 
+import com.techblazer.lbt.constant.BookingStatuses;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -19,20 +18,25 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private double amountPaid;
+    private double amount;
+
+    private String name;
+
+    private String email;
+
+    private String phone;
 
     private Date createdAt = new Date();
 
-    @ManyToOne
-    private Room room;
+    private String status = BookingStatuses.pending.name();
 
-    @ManyToMany
-    private List<Guest> guests = new ArrayList<>();
-
-    public Booking(Long id, double amountPaid, Room room, List<Guest> guests) {
+    public Booking(Long id, double amount, String name, String email, String phone) {
         this.id = id;
-        this.amountPaid = amountPaid;
-        this.room = room;
-        this.guests = guests;
+        this.amount = amount;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
     }
+
+
 }

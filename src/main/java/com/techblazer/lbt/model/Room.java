@@ -18,8 +18,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private RoomTypes type;
+    private String type;
 
     private String description;
 
@@ -30,7 +29,7 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private RoomStatuses status = RoomStatuses.AVAILABLE;
 
-    public Room(Long id, RoomTypes type, String description, double price, int number) {
+    public Room(Long id, String type, String description, double price, int number) {
         this.id = id;
         this.type = type;
         this.description = description;

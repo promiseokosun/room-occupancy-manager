@@ -21,9 +21,9 @@ public class ReservationController {
     @GetMapping
     public ResponseEntity<?> createReservationForGuest() {
 
-        BaseResponse baseResponse = reservationService.createReservation();
+        ReservationResponse reservation = reservationService.createReservation();
 
-        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+        return new ResponseEntity<>(BaseResponse.getSuccessResponse(reservation), HttpStatus.OK);
     }
 
 }

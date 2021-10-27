@@ -4,5 +4,5 @@ import com.techblazer.lbt.dto.BaseResponse;
 import com.techblazer.lbt.dto.ReservationResponse;
 
 public interface ReservationService {
-    BaseResponse createReservation();
+    ReservationResponse createReservation();
 }

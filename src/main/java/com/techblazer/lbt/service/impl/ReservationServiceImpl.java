@@ -37,7 +37,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     @Override
-    public BaseResponse createReservation() {
+    public ReservationResponse createReservation() {
 
         List<Booking> sortedBookings = bookingService.getBookingsOrderedByAmountDesc();
 
@@ -104,9 +104,7 @@ public class ReservationServiceImpl implements ReservationService {
         double premiumTotalSales = Math.floor(successfulPremiumReservations.stream().mapToDouble(value -> value.getBooking().getAmount()).sum());
         double economyTotalSales = successfulEconomyReservations.stream().mapToDouble(value -> value.getBooking().getAmount()).sum();
 
-        ReservationResponse reservationResponse = new ReservationResponse(premiumTotalSales, economyTotalSales, (premiumTotalSales + economyTotalSales));
-
-        return BaseResponse.getSuccessResponse(reservationResponse);
+        return new ReservationResponse(premiumTotalSales, economyTotalSales, (premiumTotalSales + economyTotalSales));
     }
 
     public List<Reservation> getSuccessfulReservationByRoomType(String roomType) {

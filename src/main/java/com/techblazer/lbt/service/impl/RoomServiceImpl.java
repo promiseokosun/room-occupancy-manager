@@ -46,11 +46,13 @@ public class RoomServiceImpl implements RoomService {
         roomRepo.deleteById(roomId);
     }
 
+    @Override
     public List<Room> getAvailableRooms() {
         return roomRepo.findByStatusOrderByPriceDesc(AVAILABLE);
     }
 
-    public List<Room> getAvailableRoomsByType(RoomTypes roomType) {
+    @Override
+    public List<Room> getAvailableRoomsByType(String roomType) {
         return roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, roomType);
     }
 

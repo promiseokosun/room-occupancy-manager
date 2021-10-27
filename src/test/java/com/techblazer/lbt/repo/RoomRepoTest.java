@@ -36,50 +36,50 @@ public class RoomRepoTest {
     private void shouldReturnAnOrderedListOfAvailablePremiumRooms() {
         List<Room> availableRooms = roomRepo.findAll().stream()
                 .filter(room -> room.getStatus().equals(BOOKED))
-                .map(room -> new Room(room.getId(), PREMIUM, room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
+                .map(room -> new Room(room.getId(), PREMIUM.getType(), room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
                 .collect(Collectors.toList());
 
         roomRepo.saveAll(availableRooms);
 
-        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, PREMIUM)).isNotEmpty();
+        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, PREMIUM.getType())).isNotEmpty();
     }
 
     private void shouldReturnAnOrderedListOfAvailableEconomyRooms() {
         List<Room> availableRooms = roomRepo.findAll().stream()
-                .map(room -> new Room(room.getId(), ECONOMY, room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
+                .map(room -> new Room(room.getId(), ECONOMY.getType(), room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
                 .collect(Collectors.toList());
 
         roomRepo.saveAll(availableRooms);
 
-        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, ECONOMY)).isNotEmpty();
+        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, ECONOMY.getType())).isNotEmpty();
     }
 
     private void shouldReturnEmptyWhenNonExists() {
         List<Room> availableRooms = roomRepo.findAll().stream()
-                .map(room -> new Room(room.getId(), ECONOMY, room.getDescription(), room.getPrice(), room.getNumber(), BOOKED))
+                .map(room -> new Room(room.getId(), ECONOMY.getType(), room.getDescription(), room.getPrice(), room.getNumber(), BOOKED))
                 .collect(Collectors.toList());
 
         roomRepo.saveAll(availableRooms);
 
-        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, ECONOMY)).isEmpty();
+        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, ECONOMY.getType())).isEmpty();
 
 
         availableRooms = roomRepo.findAll().stream()
-                .map(room -> new Room(room.getId(), ECONOMY, room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
+                .map(room -> new Room(room.getId(), ECONOMY.getType(), room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
                 .collect(Collectors.toList());
 
         roomRepo.saveAll(availableRooms);
 
-        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, PREMIUM)).isEmpty();
+        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, PREMIUM.getType())).isEmpty();
 
 
         availableRooms = roomRepo.findAll().stream()
-                .map(room -> new Room(room.getId(), PREMIUM, room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
+                .map(room -> new Room(room.getId(), PREMIUM.getType(), room.getDescription(), room.getPrice(), room.getNumber(), AVAILABLE))
                 .collect(Collectors.toList());
 
         roomRepo.saveAll(availableRooms);
 
-        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, ECONOMY)).isEmpty();
+        assertThat(roomRepo.findByStatusAndTypeOrderByPriceDesc(AVAILABLE, ECONOMY.getType())).isEmpty();
 
     }
 

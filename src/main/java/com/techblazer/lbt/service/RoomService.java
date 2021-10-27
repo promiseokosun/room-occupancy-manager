@@ -15,4 +15,8 @@ public interface RoomService {
     Room saveRoom(Room room);
 
     void deleteRoom(Long roomId);
+
+    List<Room> getAvailableRooms();
+
+    List<Room> getAvailableRoomsByType(String roomType);
 }
